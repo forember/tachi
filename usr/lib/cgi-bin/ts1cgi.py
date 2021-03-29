@@ -158,7 +158,8 @@ if pathname.endswith(".ts1"):
         <main id="container" class="container" role="main">
             <div id="content" class="markdown-content ts1-content">
     """)
-    if not (url == "/" or stripped.endswith("<!-- NOADD -->")):
+    if not (url == "/" or stripped.endswith("<!-- NOADD -->")
+            or stripped.endswith("<!-- NOHOME -->")):
         print('<p><a href="/">[Home]</a></p>')
     print(markdown.markdown(mdtext, extensions=EXTENSION_LIST))
     if not (stripped.endswith("<!-- NOC -->")
