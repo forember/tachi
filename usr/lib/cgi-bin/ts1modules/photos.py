@@ -46,16 +46,21 @@ def thumbnail_filename(photo_filename, maxdim=750):
     return thumbfile
 
 def twocolumn_thumbnail(photo_filename, columns=2, maxdim=750, link=None,
-        caption=None, hover_filter=None):
+        caption=None, hover_filter=None, prefix=None):
     '''Generates markdown for inserting a thumbnail into a page.'''
     if link is None:
         link = photo_filename
+    thumbnail = thumbnail_filename(photo_filename, maxdim)
+    if prefix:
+        from os.path import join
+        link = join(prefix, link)
+        thumbnail = join(prefix, thumbnail)
     # Render the thumbnail template.
     from ts1template import render_template_env
     return render_template_env(TWOCOL_THUMB_TEMPLATE_FILE,
             columns=columns, maxdim=maxdim, link=link,
-            thumbnail=thumbnail_filename(photo_filename, maxdim),
-            caption=caption, hover_filter=hover_filter)
+            thumbnail=thumbnail, caption=caption,
+            hover_filter=hover_filter)
 
 TACHIBANASITE_TPL_LIB_BINDINGS = {
         'thumbnail_filename': thumbnail_filename,

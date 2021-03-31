@@ -13,7 +13,9 @@ def render_template_env(filename, **environment):
     from bottle import SimpleTemplate
     with open(filename, encoding="UTF-8") as fileobj:
         cwd = os.getcwd()
-        os.chdir(os.path.dirname(filename))
+        dirname = os.path.dirname(filename)
+        if dirname:
+          os.chdir(dirname)
         r = SimpleTemplate(fileobj, name=filename).render(**environment)
         os.chdir(cwd)
         return r
@@ -23,6 +25,18 @@ def render_template(filename, **environment):
     env = DEFAULT_TEMPLATE_ENV.copy()
     env.update(environment)
     return render_template_env(filename, **env)
+
+def render_template_text_env(text, **environment):
+    """Render the template in the given environment."""
+    from bottle import SimpleTemplate
+    r = SimpleTemplate(text).render(**environment)
+    return r
+
+def render_template_text(text, **environment):
+    """Render the template in the default environment with additional values."""
+    env = DEFAULT_TEMPLATE_ENV.copy()
+    env.update(environment)
+    return render_template_text_env(text, **env)
 
 def _get_tpl_lib_bindings():
     """Gets bindings from modules."""
@@ -55,6 +69,8 @@ DEFAULT_TEMPLATE_ENV = {
         "_GET": {},
         "render_template_env": render_template_env,
         "render_template": render_template,
+        "render_template_text_env": render_template_text_env,
+        "render_template_text": render_template_text,
         }
 
 for lib_bindings in _get_tpl_lib_bindings():

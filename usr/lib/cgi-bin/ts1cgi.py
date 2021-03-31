@@ -94,7 +94,8 @@ if pathname.endswith(".ts1"):
     form_dict = {}
     for key in form.keys():
         form_dict[key] = form.getfirst(key)
-    mdtext = ts1template.render_template(pathname, _GET=form_dict, _FORM=form)
+    mdtext = ts1template.render_template(pathname, _GET=form_dict, _FORM=form,
+            _MARKDOWN=lambda t: markdown.markdown(t, extensions=EXTENSION_LIST))
     print("""
     <!DOCTYPE html>
     <html>

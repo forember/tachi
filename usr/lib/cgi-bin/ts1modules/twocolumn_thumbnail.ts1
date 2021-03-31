@@ -22,8 +22,8 @@ if hover_filter:
 end
 %>
 
-<div class="columnphoto"; style="width:{{99/columns}}%;
-        max-height:{{maxdim}}px">
+<div class="columnphoto" style="width:{{99/columns}}%;
+        max-height:{{maxdim}}px; display: inline-block;">
     <a href="{{!link}}">
         <img class="{{img_classes}}" src="{{!thumbnail}}" />
     </a>
