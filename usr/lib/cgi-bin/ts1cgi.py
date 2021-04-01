@@ -98,7 +98,7 @@ if pathname.endswith(".ts1"):
             _MARKDOWN=lambda t: markdown.markdown(t, extensions=EXTENSION_LIST))
     print("""
     <!DOCTYPE html>
-    <html>
+    <html lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
